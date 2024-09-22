@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formules de Dérivées</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .formula {
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Formules de Primitives - Niveau Bac</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>f(x)</th>
+                <th>F(x)</th>
+            </tr>
+        </thead>
+        <tbody id="formule-container">
+            <!-- Formules seront ajoutées ici via JavaScript -->
+        </tbody>
+    </table>
+
+    <script>
+        const formules = [
+{ description: "Primitive de \\( 0 \\)", f: "0", fp: "C" },
+{ description: "Primitive de \\( 1 \\)", f: "1", fp: "x + C" },
+{ description: "Primitive de \\( x^n \\)", f: "x^n \\ (n \\neq -1)", fp: "\\frac{x^{n+1}}{n+1} + C" },
+{ description: "Primitive de \\( \\frac{1}{x} \\)", f: "\\frac{1}{x}", fp: "\\ln(x) + C \\ (x > 0)" },
+{ description: "Primitive de \\( e^x \\)", f: "e^x", fp: "e^x + C" },
+{ description: "Primitive de \\( a^x \\)", f: "a^x", fp: "\\frac{a^x}{\\ln(a)} + C \\ (a > 0)" },
+{ description: "Primitive de \\( \\ln(x) \\)", f: "\\ln(x)", fp: "x \\ln(x) - x + C" },
+{ description: "Primitive de \\( \\frac{1}{\\sqrt{x}} \\)", f: "\\frac{1}{\\sqrt{x}}", fp: "2\\sqrt{x} + C" },
+{ description: "Primitive de \\( \\frac{1}{x^2} \\)", f: "\\frac{1}{x^2}", fp: "-\\frac{1}{x} + C" },
+{ description: "Primitive de \\( \\sin(x) \\)", f: "\\sin(x)", fp: "-\\cos(x) + C" },
+{ description: "Primitive de \\( \\cos(x) \\)", f: "\\cos(x)", fp: "\\sin(x) + C" },
+{ description: "Primitive de \\( \\tan(x) \\)", f: "\\tan(x)", fp: "-\\ln|\\cos(x)| + C" },
+{ description: "Primitive de \\( \\frac{1}{1 + x^2} \\)", f: "\\frac{1}{1 + x^2}", fp: "\\arctan(x) + C" },
+{ description: "Primitive de \\( \\frac{1}{\\sqrt{1 - x^2}} \\)", f: "\\frac{1}{\\sqrt{1 - x^2}}", fp: "\\arcsin(x) + C" },
+{ description: "Primitive de \\( \\frac{-1}{\\sqrt{1 - x^2}} \\)", f: "\\frac{-1}{\\sqrt{1 - x^2}}", fp: "\\arccos(x) + C" }
+
+        ];
+
+        const container = document.getElementById('formule-container');
+
+        formules.forEach(f => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${f.description}</td>
+                <td>\\( ${f.f} \\)</td>
+                <td>\\( ${f.fp} \\)</td>
+            `;
+            container.appendChild(row);
+        });
+
+        // Re-rendre les formules avec MathJax
+        MathJax.typesetPromise();
+    </script>
+</body>
+</html>

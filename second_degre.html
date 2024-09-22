@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résolution d'équation quadratique</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1>Résolution d'équation quadratique a.x² + b.x + c </h1>
+        <div class="form-group">
+            <input type="number" class="form-control" id="a" placeholder="Coefficient a" />
+            <input type="number" class="form-control" id="b" placeholder="Coefficient b" />
+            <input type="number" class="form-control" id="c" placeholder="Coefficient c" />
+            <button class="btn btn-primary mt-3" onclick="solveEquation()">Résoudre</button>
+        </div>
+        <div id="solution" class="mt-3"></div>
+        <div id="graph" class="mt-5"></div>
+    </div>
+
+    <script>
+        function solveEquation() {
+            const a = parseFloat(document.getElementById('a').value);
+            const b = parseFloat(document.getElementById('b').value);
+            const c = parseFloat(document.getElementById('c').value);
+            const discriminant = b * b - 4 * a * c;
+            let solution = '';
+            let root1, root2;
+
+            if (discriminant > 0) {
+                root1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+                root2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+                solution = `Les solutions sont x1 = ${root1.toFixed(2)} et x2 = ${root2.toFixed(2)}.`;
+            } else if (discriminant === 0) {
+                const root = -b / (2 * a);
+                solution = `Il y a une solution unique: x = ${root.toFixed(2)}.`;
+                root1 = root2 = root; // Assign unique root for scaling
+            } else {
+                solution = 'Pas de solutions réelles.';
+            }
+            document.getElementById('solution').innerText = solution;
+            plotGraph(a, b, c, root1, root2);
+        }
+
+        function plotGraph(a, b, c, root1, root2) {
+            const data = [];
+            const minX = root1 !== undefined && root2 !== undefined ? Math.min(root1, root2) - 5 : -10;
+            const maxX = root1 !== undefined && root2 !== undefined ? Math.max(root1, root2) + 5 : 10;
+
+            // Calculer les valeurs Y pour le graphique
+            for (let x = minX; x <= maxX; x += 0.1) {
+                data.push({ x: x, y: a * x * x + b * x + c });
+            }
+
+            const xValues = data.map(point => point.x);
+            const yValues = data.map(point => point.y);
+
+            // Tracé avec Plotly
+            const trace = {
+                x: xValues,
+                y: yValues,
+                mode: 'lines',
+                type: 'scatter',
+                line: { color: 'blue' }
+            };
+
+            const layout = {
+                title: 'Graphique de y = ax² + bx + c',
+                xaxis: {
+                    title: 'x',
+                    range: [minX, maxX]
+                },
+                yaxis: {
+                    title: 'y',
+                    autorange: true
+                }
+            };
+
+            Plotly.newPlot('graph', [trace], layout);
+        }
+    </script>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

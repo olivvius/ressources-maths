@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formules de Dérivées</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .formula {
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Formules de Dérivées - Niveau Bac</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>f(x)</th>
+                <th>f'(x)</th>
+            </tr>
+        </thead>
+        <tbody id="formule-container">
+            <!-- Formules seront ajoutées ici via JavaScript -->
+        </tbody>
+    </table>
+
+    <script>
+        const formules = [
+            { description: "Dérivée de la constante", f: "c", fp: "0" },
+            { description: "Dérivée de l'identité", f: "x", fp: "1" },
+            { description: "Dérivée de la puissance", f: "x^n", fp: "nx^{n-1}" },
+            { description: "Dérivée de la somme", f: "f(x) + g(x)", fp: "f'(x) + g'(x)" },
+            { description: "Dérivée du produit", f: "f(x)g(x)", fp: "f'(x).g(x) + f(x).g'(x)" },
+            { description: "Dérivée du quotient", f: "\\frac{f(x)}{g(x)}", fp: "\\frac{f'(x).g(x) - f(x).g'(x)}{g(x)^2}" },
+            { description: "Dérivée de l'inverse", f: "\\frac{1}{f(x)}", fp: "\\frac{-f'(x)}{f(x)^2}" },
+            { description: "Dérivée de la composée", f: "(f \\circ g)(x)", fp: "g'(x).f'(g(x))" },
+            { description: "Dérivée de \\( e^x \\)", f: "e^x", fp: "e^x" },
+            { description: "Dérivée de \\( \\ln(x) \\)", f: "\\ln(x)", fp: "\\frac{1}{x}" },
+            { description: "Dérivée de \\( \\sin(x) \\)", f: "\\sin(x)", fp: "\\cos(x)" },
+            { description: "Dérivée de \\( \\cos(x) \\)", f: "\\cos(x)", fp: "-\\sin(x)" },
+            { description: "Dérivée de \\( \\tan(x) \\)", f: "\\tan(x)", fp: "\\frac{1}{\\cos^2(x)}" },
+            { description: "Dérivée de \\( \\ln(f(x)) \\)", f: "\\ln(f(x))", fp: "\\frac{f'(x)}{f(x)}" },
+            { description: "Dérivée de \\( \\exp(f(x)) \\)", f: "\\exp(f(x))", fp: "\\exp(f(x)) f'(x)" },
+            { description: "Dérivée de \\( a^x \\)", f: "a^x", fp: "a^x \\ln(a)" },
+            { description: "Dérivée de \\( \\sqrt{f(x)} \\)", f: "\\sqrt{f(x)}", fp: "\\frac{f'(x)}{2\\sqrt{f(x)}}" },
+            { description: "Dérivée de \\( \\cos(f(x)) \\)", f: "\\cos(f(x))", fp: "-\\sin(f(x)) f'(x)" },
+            { description: "Dérivée de \\( \\sin(f(x)) \\)", f: "\\sin(f(x))", fp: "\\cos(f(x)) f'(x)" },
+            { description: "Dérivée de \\( \\tan(f(x)) \\)", f: "\\tan(f(x))", fp: "\\frac{f'(x)}{\\cos^2(f(x))}" }
+
+        ];
+
+        const container = document.getElementById('formule-container');
+
+        formules.forEach(f => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${f.description}</td>
+                <td>\\( ${f.f} \\)</td>
+                <td>\\( ${f.fp} \\)</td>
+            `;
+            container.appendChild(row);
+        });
+
+        // Re-rendre les formules avec MathJax
+        MathJax.typesetPromise();
+    </script>
+</body>
+</html>

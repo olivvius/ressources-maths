@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traceur de Courbes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.0.0/math.min.js"></script>
+    <style>
+        #plot {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h1>Traceur de Courbes</h1>
+        <div class="form-group">
+            <p>
+                Pour tracer des courbes, vous pouvez utiliser des fonctions mathématiques comme <code>sin(x)</code>, <code>cos(x)</code>, <code>exp(x)</code> (pour e^x), <code>ln(x)</code> (pour le logarithme naturel), ou des polynômes comme <code>x^2 + 2*x + 1</code>. 
+                Utilisez <code>sqrt(x)</code> pour la racine carrée, et n'hésitez pas à combiner ces fonctions de manière à créer des expressions plus complexes.
+            </p>
+            <p>
+                Pour entrer des fractions, utilisez la notation classique des fractions, par exemple <code>1/2</code> pour une demi ou <code>x/(x + 1)</code> pour exprimer une fraction de polynôme. 
+                Vous pouvez les intégrer dans d'autres expressions comme <code>sin(x) + 1/2</code> ou <code>exp(x) - 1/3</code>.
+            </p>
+            <label for="functionInput">Entrez la fonction f(x) :</label>
+            <input type="text" class="form-control" id="functionInput" placeholder="ex : sin(x) + 1/2">
+        </div>
+        <button class="btn btn-primary" onclick="plotFunction()">Tracer la fonction</button>
+    </div>
+
+    <div id="plot"></div>
+
+    <script>
+        function plotFunction() {
+            const funcInput = document.getElementById('functionInput').value;
+            const xMin = -10;  // Valeur min par défaut
+            const xMax = 10;   // Valeur max par défaut
+            const step = 0.1;
+
+            const xValues = [];
+            const yValues = [];
+
+            for (let x = xMin; x <= xMax; x += step) {
+                xValues.push(x);
+                try {
+                    // Évaluez l'expression mathématique fournie par l'utilisateur
+                    const y = math.evaluate(funcInput, { x: x });
+                    yValues.push(y);
+                } catch (error) {
+                    alert("Erreur dans l'évaluation de la fonction : " + error.message);
+                    return;
+                }
+            }
+
+            const trace = {
+                x: xValues,
+                y: yValues,
+                mode: 'lines',
+                type: 'scatter',
+                name: `f(x) = ${funcInput}`,
+                line: { width: 2 }
+            };
+
+            const data = [trace];
+
+            const layout = {
+                title: `Trace de la fonction f(x) = ${funcInput}`,
+                xaxis: { title: 'x' },
+                yaxis: { title: 'f(x)' }
+            };
+
+            Plotly.newPlot('plot', data, layout);
+        }
+    </script>
+</body>
+</html>

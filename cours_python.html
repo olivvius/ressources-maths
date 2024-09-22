@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction à Python</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border: 1px solid #ccc;
+            overflow: auto;
+        }
+        code {
+            color: #d63384;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Introduction à Python</h1>
+
+<h2>1. Affichage d'un message</h2>
+<pre><code>print("Bienvenue dans le monde de Python !")</code></pre>
+
+<h2>2. Lecture de saisie utilisateur</h2>
+<pre><code>nom = input("Quel est ton nom ? ")
+print(f"Bonjour, {nom} !")</code></pre>
+
+<h2>3. Variables en Python</h2>
+<pre><code>age = 17  # Un entier
+pi = 3.14159  # Un nombre à virgule flottante
+nom_complet = "Jean Dupont"  # Une chaîne de caractères</code></pre>
+
+<h2>4. Calculs mathématiques</h2>
+<pre><code>a = 5
+b = 3
+somme = a + b
+produit = a * b
+difference = a - b
+division = a / b
+print(f"Somme: {somme}, Produit: {produit}, Différence: {difference}, Division: {division}")</code></pre>
+
+<h2>5. Conditions</h2>
+<pre><code>if age < 18:
+    print("Vous êtes mineur.")
+elif age == 18:
+    print("Vous avez tout juste 18 ans.")
+else:
+    print("Vous êtes majeur.")</code></pre>
+
+<h2>6. Boucle for</h2>
+<pre><code>for i in range(5):  # de 0 à 4
+    print(f"Iteration {i}")</code></pre>
+
+<h2>7. Boucle while</h2>
+<pre><code>compteur = 0
+while compteur < 5:
+    print(f"Compteur: {compteur}")
+    compteur += 1  # Incrémente compteur</code></pre>
+
+<h2>8. Modules random et math</h2>
+<pre><code>import random
+import math
+nombre_aleatoire = random.randint(1, 10)
+print(f"Nombre aléatoire : {nombre_aleatoire}")
+racine_carre = math.sqrt(16)  # racine carrée de 16
+puissance = math.pow(2, 3)  # 2^3
+print(f"Racine carrée : {racine_carre}, Puissance : {puissance}")</code></pre>
+
+<h2>9. Affichage des nombres pairs</h2>
+<pre><code>for i in range(1, 11):
+    if i % 2 == 0:
+        print(f"{i} est pair.")</code></pre>
+
+<h2>10. Suite arithmétique</h2>
+<pre><code>premier_terme = 1
+raison = 3
+n = 10  # Nombre de termes
+for i in range(n):
+    terme = premier_terme + i * raison
+    print(f"Terme {i + 1}: {terme}")</code></pre>
+
+<h2>11. Opérateurs</h2>
+<pre><code>a = 10
+b = 3
+c = a % b
+d = a // b
+e = a**b
+print(f"10 % 3 = {c} (reste)")
+print(f"10 // 3 = {d} (quotient entier)")
+print(f"10 ** 3 = {e} (puissance)")</code></pre>
+
+<h2>12. Listes</h2>
+<pre><code>ma_liste = [1, 2, 3, 4, 5]
+print(f"Liste : {ma_liste}")
+a = ma_liste[0] # accéder à un élément de la liste à l'index 0
+ma_liste[2] = 35 # modifier la valeur de l'élement de la liste à l'index 2
+ma_liste.append(6)  # Ajoute un élément à la liste
+ma_liste.remove(3)  # Supprime la première occurrence de 3
+ma_liste.sort() # trier la liste
+ma_liste.reverse() # renverser la liste
+b = len(ma_liste) # récupérer le nombre d'éléments dans la liste</code></pre>
+
+<h2>13. Graphiques avec matplotlib</h2>
+<pre><code>import matplotlib.pyplot as plt
+x_vals = [1, 2, 3, 4, 5]
+y_vals = [1, 4, 9, 16, 25]
+plt.plot(x_vals, y_vals)
+plt.title("Courbe de y = x^2")
+plt.xlabel("x")
+plt.ylabel("y")
+plt.show()</code></pre>
+
+<h2>14. Chaînes de caractères</h2>
+<pre><code>ma_chaine = "Bonjour, tout le monde!"
+print(f"Premier caractère : {ma_chaine[0]}")
+print(f"Sous-chaîne de 0 à 6 : {ma_chaine[0:7]}")
+print(f"Longueur de la chaîne : {len(ma_chaine)}")
+print(f"En majuscules : {ma_chaine.upper()}")
+print(f"En minuscules : {ma_chaine.lower()}")
+nouvelle_chaine = ma_chaine.replace("tout le monde", "les amis")
+mots = ma_chaine.split()
+chaine_concatenée = ma_chaine + " Comment ça va ?"
+prenom = "Alice"
+age = 25
+message = f"Je m'appelle {prenom} et j'ai {age} ans."
+print(f"Message formaté : {message}")</code></pre>
+
+<h2>15. Fonctions</h2>
+<pre><code>def carre(x):
+    return x * x
+print(f"Le carré de 4 est {carre(4)}")
+
+def suite_arithmetique(u0, r, n):
+    """Renvoie le n-ème terme de la suite arithmétique."""
+    return u0 + n * r
+
+u0 = 5  # premier terme
+r = 2   # raison
+n = 10  # n-ième terme
+print(f"Le terme u_{n} de la suite arithmétique est : {suite_arithmetique(u0, r, n)}")
+
+def suite_geometrique(u0, q, n):
+    """Renvoie le n-ème terme de la suite géométrique."""
+    return u0 * (q ** n)
+
+u0 = 3  # premier terme
+q = 2   # raison
+n = 5   # n-ième terme
+print(f"Le terme u_{n} de la suite géométrique est : {suite_geometrique(u0, q, n)}")</code></pre>
+
+</body>
+</html>
